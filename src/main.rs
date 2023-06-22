@@ -1,43 +1,33 @@
-use std::io::{self, Write};
-
+mod read_lines;
+mod select_boolean_in_console;
 use passwords::PasswordGenerator;
-
-fn select_boolean_in_console(option: String) -> bool {
-    if option == "N" || option == "n" {
-        return false;
-    }
-
-    return true;
-}
-
-fn read_lines(msg: String) -> String {
-    let mut input: String = String::new();
-    io::stdout().flush().unwrap();
-    let _ = io::stdin().read_line(&mut input);
-    print!("{msg}");
-
-    return input;
-}
-
+use read_lines::read_lines;
+use select_boolean_in_console::select_boolean_in_console;
 fn main() {
-    let mut is_numbers: bool = false;
-    let mut is_lowercase_letters: bool = true;
-    let mut is_uppercase_letters: bool = false;
-    let mut is_symbols: bool = false;
-    let mut is_spaces: bool = false;
-    let mut is_exclude_similar_characters: bool = false;
-    let mut is_strict: bool = false;
-
-    let mut amount: usize = 1;
-
     let is_length: usize = read_lines("Escreva o tamanho da password: ".to_string())
         .trim()
         .parse()
         .unwrap();
 
-    println!("{is_length}");
+    let is_numbers: bool =
+        select_boolean_in_console(read_lines("Possui números? (S/N): ".to_string()));
+    let is_lowercase_letters: bool =
+        select_boolean_in_console(read_lines("Possui letras minusculas? (S/N): ".to_string()));
+    let is_uppercase_letters: bool =
+        select_boolean_in_console(read_lines("Possui letras maiusculas? (S/N): ".to_string()));
+    let is_symbols: bool =
+        select_boolean_in_console(read_lines("Possui símbolos? (S/N): ".to_string()));
+    let is_spaces: bool =
+        select_boolean_in_console(read_lines("Possui espaços? (S/N): ".to_string()));
+    let is_exclude_similar_characters: bool =
+        select_boolean_in_console(read_lines("Possui caracteres iguais? (S/N): ".to_string()));
+    let is_strict: bool = select_boolean_in_console(read_lines("Senha forte? (S/N): ".to_string()));
+    let amount: usize = read_lines("Quantidade de passwords: ".to_string())
+        .trim()
+        .parse()
+        .unwrap();
 
-    let pg = PasswordGenerator {
+    let password_options = PasswordGenerator {
         length: is_length,
         numbers: is_numbers,
         lowercase_letters: is_lowercase_letters,
@@ -48,6 +38,6 @@ fn main() {
         strict: is_strict,
     };
 
-    println!("{}", pg.generate_one().unwrap());
-    println!("{:?}", pg.generate(amount).unwrap());
+    println!("Passwords geradas com sucesso!!");
+    println!("{:?}", password_options.generate(amount));
 }
