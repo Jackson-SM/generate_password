@@ -6,5 +6,7 @@ pub fn read_lines(msg: String) -> String {
     let mut input: String = String::new();
     let _ = io::stdin().read_line(&mut input);
 
+    println!("{}", input);
+
     return input;
 }
