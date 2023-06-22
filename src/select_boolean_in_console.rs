@@ -1,5 +1,5 @@
 pub fn select_boolean_in_console(option: String) -> bool {
-    if option == "N" || option == "n" {
+    if option.trim() == "N" || option.trim() == "n" {
         return false;
     }
 
