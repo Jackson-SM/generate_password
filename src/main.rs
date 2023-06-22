@@ -38,6 +38,11 @@ fn main() {
         strict: is_strict,
     };
 
+    let password_iterator = password_options.generate(amount).unwrap();
+
+    for password in &password_iterator {
+        println!("Password: {}", password)
+    }
+
     println!("Passwords geradas com sucesso!!");
-    println!("{:?}", password_options.generate(amount));
 }
