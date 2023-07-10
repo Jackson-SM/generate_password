@@ -13,6 +13,11 @@
 
 > Certifique-se de ler atentamente as perguntas e fornecer as respostas adequadas (S/N) para as opções apresentadas.
 
+### Como Iniciar a aplicação
+```zsh
+cargo run
+```
+
 ```Após a geração das senhas, elas serão exibidas na tela. O programa também imprimirá a mensagem "Passwords geradas com sucesso!!" para indicar que o processo foi concluído com êxito.```
 
 # Conclusão
